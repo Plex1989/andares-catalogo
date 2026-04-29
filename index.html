@@ -22,8 +22,8 @@
                         brand: {
                             dark: '#111111',
                             light: '#f8f9fa',
-                            gold: '#C5A880', // Dorado elegante
-                            green: '#1E3F20' // Verde Monte Alto
+                            gold: '#C5A880', 
+                            green: '#1E3F20' 
                         }
                     }
                 }
@@ -32,12 +32,7 @@
     </script>
     <style>
         body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-color: #f8f9fa; }
-        .hero-pattern {
-            background-color: #111;
-            background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
-            background-size: 30px 30px;
-        }
-        /* El truco mágico para quitar el fondo blanco del logo JPG */
+        /* Truco para quitar el fondo blanco del logo JPG */
         .logo-blend {
             mix-blend-mode: multiply;
         }
@@ -54,13 +49,13 @@
             { 
                 id: 1, 
                 nombre: "Lotes Campestres Monte Alto", 
-                ubicacion: "Entorno Natural, Zona Protegida", 
+                ubicacion: "Rodeado de Zona Protegida", // ¡AQUÍ ESTÁ EL CAMBIO CHINGÓN!
                 area: "300", 
                 precio: "Avalúo $2,400/m²", 
                 enganche: "Enganche 30% | Hasta 24 MSI",
                 status: "Disponible",
-                imagen: "./portada-monte-alto.jpg", // La imagen que subirás a GitHub
-                linkDestino: "https://monte-alto.vercel.app/", // Link real
+                imagen: "./portada-monte-alto.jpg", 
+                linkDestino: "https://monte-alto.vercel.app/", 
                 isReady: true 
             },
             { id: 2, nombre: "Residencial Fase 2 (Próximamente)", ubicacion: "San Isidro, Sur", area: "250", precio: "Por Definir", enganche: "Espéralo pronto", status: "Próximamente", isReady: false },
@@ -81,10 +76,8 @@
 
             const handleVerDetalles = (terreno) => {
                 if (terreno.isReady && terreno.linkDestino) {
-                    // Si ya está listo (como Monte Alto), abre su página web
                     window.open(terreno.linkDestino, '_blank');
                 } else {
-                    // Si no está listo, muestra el aviso
                     setSelectedLote(terreno);
                 }
             };
@@ -92,123 +85,111 @@
             return (
                 <div className="min-h-screen flex flex-col">
                     
-                    {/* BARRA DE NAVEGACIÓN (Fondo blanco para que el logo se mezcle perfecto) */}
-                    <nav className="bg-white shadow-md sticky top-0 z-40">
-                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex items-center justify-between">
-                            
-                            {/* LOGO ANDARES CORPORATIVO */}
-                            <div className="flex items-center h-full py-2">
-                                <img 
-                                    src="./logo.jpg" 
-                                    alt="Andares Corporativo" 
-                                    className="h-full object-contain logo-blend"
-                                    onError={(e) => {
-                                        // Si la imagen falla (aún no la subes), muestra este texto de respaldo
-                                        e.target.style.display = 'none';
-                                        e.target.nextSibling.style.display = 'flex';
-                                    }}
-                                />
-                                {/* Texto de respaldo por si la imagen no carga */}
-                                <div style={{display: 'none'}} className="items-center gap-2">
-                                    <span className="font-serif italic text-3xl font-black text-brand-dark">Andares</span>
-                                    <span className="text-[10px] font-bold tracking-[0.2em] mt-2">CORPORATIVO</span>
-                                </div>
-                            </div>
-
-                            <button onClick={handleWhatsAppGeneral} className="bg-brand-dark text-white px-6 py-3 rounded-full text-sm font-bold hover:bg-brand-gold transition-colors flex items-center gap-2 shadow-lg hover:shadow-brand-gold/50">
-                                <i className="fa-brands fa-whatsapp text-green-400 text-lg"></i>
-                                <span className="hidden sm:inline">Hablar con un Asesor</span>
-                            </button>
+                    {/* CABECERA CENTRADA PROFESIONAL */}
+                    <header className="bg-white py-12 px-4 flex flex-col items-center justify-center border-b border-gray-200">
+                        <img 
+                            src="./logo.jpg" 
+                            alt="Andares Corporativo" 
+                            className="h-32 md:h-48 object-contain logo-blend mb-2"
+                            onError={(e) => {
+                                e.target.style.display = 'none';
+                                e.target.nextSibling.style.display = 'block';
+                            }}
+                        />
+                        <div style={{display: 'none'}} className="text-center mb-4">
+                            <h1 className="font-serif italic text-5xl font-black text-brand-dark">Andares</h1>
+                            <p className="text-sm font-bold tracking-[0.3em] mt-2 text-brand-dark">CORPORATIVO</p>
                         </div>
-                    </nav>
-
-                    {/* HERO SECTION */}
-                    <header className="hero-pattern text-white py-24 sm:py-32 relative overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-brand-dark opacity-90"></div>
-                        <div className="relative max-w-4xl mx-auto px-6 text-center z-10">
-                            <p className="text-brand-gold font-bold tracking-[0.3em] uppercase text-sm mb-4">Confianza que construye</p>
-                            <h1 className="text-4xl sm:text-6xl font-black mb-6 tracking-tight leading-tight">
-                                Invierte inteligentemente en tu <span className="text-brand-gold italic">Patrimonio.</span>
-                            </h1>
-                            <p className="text-lg sm:text-xl text-gray-300 mb-10 max-w-2xl mx-auto font-light">
-                                Descubre nuestro catálogo de terrenos residenciales y campestres. Desarrollos con alta plusvalía, certeza legal y los mejores planes de financiamiento.
-                            </p>
-                        </div>
+                        
+                        <p className="text-brand-gold font-bold tracking-[0.4em] uppercase text-xs md:text-sm mt-4 italic">"Confianza que construye"</p>
+                        
+                        <button onClick={handleWhatsAppGeneral} className="mt-8 bg-brand-dark text-white px-8 py-4 rounded-full text-sm font-bold hover:bg-brand-gold transition-all shadow-xl flex items-center gap-2">
+                            <i className="fa-brands fa-whatsapp text-green-400 text-xl"></i>
+                            Hablar con un Asesor
+                        </button>
                     </header>
 
-                    {/* SECCIÓN DEL CATÁLOGO */}
-                    <main id="catalogo" className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-                        
-                        {/* CUADRÍCULA DE LOS 7 TERRENOS */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {/* SECCIÓN HERO (PORTADA) */}
+                    <section 
+                        className="relative w-full h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden"
+                        style={{
+                            backgroundImage: "linear-gradient(to bottom, rgba(17,17,17,0.8), rgba(17,17,17,0.5)), url('./portada-monte-alto.jpg')",
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center'
+                        }}
+                    >
+                        <div className="relative max-w-4xl mx-auto px-6 text-center z-10">
+                            <h2 className="text-3xl md:text-6xl font-black text-white mb-6 tracking-tight leading-tight drop-shadow-2xl">
+                                Invierte hoy en tu <span className="text-brand-gold italic">Futuro.</span>
+                            </h2>
+                            <p className="text-lg md:text-2xl text-gray-200 max-w-2xl mx-auto font-light drop-shadow-lg">
+                                Desarrollos con certeza legal, alta plusvalía y los mejores planes de financiamiento en la zona.
+                            </p>
+                        </div>
+                    </section>
+
+                    {/* CATÁLOGO DE LOTES */}
+                    <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                             {TERRENOS.map((terreno) => (
-                                <div key={terreno.id} className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 flex flex-col group relative transform hover:-translate-y-1">
+                                <div key={terreno.id} className="bg-white rounded-[2.5rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 flex flex-col group transform hover:-translate-y-2">
                                     
-                                    {/* Etiqueta de Estado */}
-                                    <div className="absolute top-4 right-4 z-20">
+                                    <div className="absolute top-6 right-6 z-20">
                                         {terreno.isReady ? (
-                                            <span className="bg-green-500 text-white px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest shadow-md flex items-center gap-2">
-                                                <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></div> Disponible
+                                            <span className="bg-green-500 text-white px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg flex items-center gap-2">
+                                                <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div> Disponible
                                             </span>
                                         ) : (
-                                            <span className="bg-gray-800/80 backdrop-blur-sm text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">
+                                            <span className="bg-gray-800/90 backdrop-blur-md text-white px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest">
                                                 Próximamente
                                             </span>
                                         )}
                                     </div>
 
-                                    {/* Imagen del Terreno */}
-                                    <div className="h-64 bg-gray-100 relative overflow-hidden flex items-center justify-center">
+                                    <div className="h-72 bg-gray-100 relative overflow-hidden">
                                         {terreno.isReady ? (
                                             <img 
                                                 src={terreno.imagen} 
                                                 alt={terreno.nombre} 
-                                                className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                                                className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-1000"
                                                 onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1000&auto=format&fit=crop'; }}
                                             />
                                         ) : (
-                                            <div className="w-full h-full bg-brand-dark/5 flex flex-col items-center justify-center text-gray-400">
-                                                <i className="fa-solid fa-map-location-dot text-6xl mb-4 opacity-50"></i>
-                                                <p className="text-xs uppercase tracking-widest font-bold opacity-50">Preparando Terreno</p>
+                                            <div className="w-full h-full bg-brand-dark/10 flex flex-col items-center justify-center text-gray-400">
+                                                <i className="fa-solid fa-map-location-dot text-7xl mb-4 opacity-30"></i>
                                             </div>
                                         )}
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
                                     </div>
 
-                                    {/* Información de la Tarjeta */}
-                                    <div className="p-8 flex-1 flex flex-col relative bg-white">
-                                        {/* Título y Ubicación */}
-                                        <h3 className="text-2xl font-black text-brand-dark mb-2 leading-tight">{terreno.nombre}</h3>
-                                        <p className="text-gray-500 text-sm mb-6 flex items-start gap-2">
+                                    <div className="p-10 flex-1 flex flex-col bg-white">
+                                        <h3 className="text-2xl font-black text-brand-dark mb-3 leading-tight uppercase tracking-tighter">{terreno.nombre}</h3>
+                                        <p className="text-gray-500 text-sm mb-8 flex items-start gap-2">
                                             <i className="fa-solid fa-location-dot mt-1 text-brand-gold"></i> {terreno.ubicacion}
                                         </p>
                                         
-                                        {/* Detalles Técnicos */}
-                                        <div className="grid grid-cols-2 gap-4 mb-6">
-                                            <div className="bg-gray-50 p-3 rounded-xl border border-gray-100">
-                                                <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1">Superficie</p>
-                                                <p className="font-black text-brand-dark flex items-center gap-2">
-                                                    <i className="fa-solid fa-vector-square text-brand-gold"></i> {terreno.area} m²
-                                                </p>
+                                        <div className="grid grid-cols-2 gap-4 mb-8">
+                                            <div className="bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                                                <p className="text-[9px] text-gray-400 font-bold uppercase tracking-widest mb-1">Área</p>
+                                                <p className="font-black text-brand-dark text-lg">{terreno.area} m²</p>
                                             </div>
-                                            <div className="bg-gray-50 p-3 rounded-xl border border-gray-100">
-                                                <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1">Precio Base</p>
-                                                <p className="font-black text-brand-dark">{terreno.precio}</p>
+                                            <div className="bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                                                <p className="text-[9px] text-gray-400 font-bold uppercase tracking-widest mb-1">Precio</p>
+                                                <p className="font-black text-brand-dark text-lg">{terreno.precio}</p>
                                             </div>
                                         </div>
 
-                                        <div className="bg-brand-gold/10 text-brand-dark px-4 py-3 rounded-xl text-xs font-bold mb-8 border border-brand-gold/20 flex items-center gap-2">
-                                            <i className="fa-solid fa-hand-holding-dollar text-brand-gold"></i> {terreno.enganche}
+                                        <div className="bg-brand-gold/10 text-brand-dark px-5 py-4 rounded-2xl text-[11px] font-bold mb-10 border border-brand-gold/20 flex items-center gap-3">
+                                            <i className="fa-solid fa-shield-check text-brand-gold text-lg"></i> {terreno.enganche}
                                         </div>
 
-                                        {/* Botón de Acción */}
                                         <div className="mt-auto">
                                             <button 
                                                 onClick={() => handleVerDetalles(terreno)} 
-                                                className={`w-full py-4 rounded-xl text-sm font-black uppercase tracking-widest transition-all ${
+                                                className={`w-full py-5 rounded-2xl text-xs font-black uppercase tracking-[0.2em] transition-all ${
                                                     terreno.isReady 
-                                                    ? 'bg-brand-dark text-white hover:bg-brand-gold shadow-lg hover:shadow-brand-gold/30' 
-                                                    : 'bg-gray-100 text-gray-400 hover:bg-gray-200'
+                                                    ? 'bg-brand-dark text-white hover:bg-brand-gold shadow-xl hover:shadow-brand-gold/40' 
+                                                    : 'bg-gray-100 text-gray-400 cursor-not-allowed'
                                                 }`}
                                             >
                                                 {terreno.isReady ? 'Ver Proyecto Completo' : 'Próximamente'}
@@ -220,43 +201,17 @@
                         </div>
                     </main>
 
-                    {/* MODAL SIMULADO PARA TERRENOS NO LISTOS */}
-                    {selectedLote && (
-                        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-300">
-                            <div className="bg-white max-w-md w-full rounded-3xl p-8 relative animate-in zoom-in duration-300">
-                                <button onClick={() => setSelectedLote(null)} className="absolute top-4 right-4 w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-500 hover:bg-red-100 hover:text-red-500 transition-colors">
-                                    <i className="fa-solid fa-xmark text-lg"></i>
-                                </button>
-                                
-                                <div className="w-20 h-20 bg-brand-gold/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                                    <i className="fa-solid fa-person-digging text-4xl text-brand-gold"></i>
-                                </div>
-                                
-                                <h3 className="text-2xl font-black text-center text-brand-dark mb-4 leading-tight uppercase">{selectedLote.nombre}</h3>
-                                
-                                <p className="text-gray-600 text-center mb-8 text-sm">
-                                    Estamos afinando los últimos detalles comerciales y legales de este desarrollo. ¡Muy pronto habilitaremos su página oficial con toda la información!
-                                </p>
-                                
-                                <button onClick={() => setSelectedLote(null)} className="w-full bg-brand-dark text-white py-4 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-black transition-colors">
-                                    Entendido
-                                </button>
-                            </div>
-                        </div>
-                    )}
-
-                    {/* FOOTER */}
-                    <footer className="bg-brand-dark text-gray-400 py-16 text-center border-t border-gray-800">
-                        <p className="font-serif italic text-3xl font-black text-white mb-2">Andares</p>
-                        <p className="font-bold text-brand-gold tracking-[0.3em] uppercase mb-6 text-xs">Corporativo</p>
-                        <p className="text-sm mb-8 font-light">"Confianza que construye"</p>
+                    {/* FOOTER CHINGÓN */}
+                    <footer className="bg-brand-dark text-gray-400 py-20 text-center border-t border-gray-800 mt-auto">
+                        <p className="font-serif italic text-4xl font-black text-white mb-3">Andares</p>
+                        <p className="font-bold text-brand-gold tracking-[0.4em] uppercase mb-10 text-xs">Corporativo</p>
                         
-                        <div className="flex justify-center gap-4 mb-10">
-                            <a href="#" className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-gold hover:text-brand-dark transition-all transform hover:scale-110"><i className="fa-brands fa-facebook-f"></i></a>
-                            <a href="#" className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-gold hover:text-brand-dark transition-all transform hover:scale-110"><i className="fa-brands fa-instagram"></i></a>
-                            <a href="#" className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-gold hover:text-brand-dark transition-all transform hover:scale-110"><i className="fa-brands fa-whatsapp"></i></a>
+                        <div className="flex justify-center gap-6 mb-12">
+                            <a href="#" className="w-14 h-14 rounded-full bg-gray-900 flex items-center justify-center hover:bg-brand-gold hover:text-brand-dark transition-all transform hover:scale-110 shadow-lg"><i className="fa-brands fa-facebook-f text-xl"></i></a>
+                            <a href="#" className="w-14 h-14 rounded-full bg-gray-900 flex items-center justify-center hover:bg-brand-gold hover:text-brand-dark transition-all transform hover:scale-110 shadow-lg"><i className="fa-brands fa-instagram text-xl"></i></a>
+                            <a href="#" className="w-14 h-14 rounded-full bg-gray-900 flex items-center justify-center hover:bg-brand-gold hover:text-brand-dark transition-all transform hover:scale-110 shadow-lg"><i className="fa-brands fa-whatsapp text-xl"></i></a>
                         </div>
-                        <p className="text-xs opacity-50 tracking-widest">&copy; 2026 ANDARES CORPORATIVO.</p>
+                        <p className="text-[10px] opacity-40 tracking-[0.3em] uppercase">&copy; 2026 ANDARES CORPORATIVO.</p>
                     </footer>
 
                 </div>
